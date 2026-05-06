@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>ADMIN | GUTEN</title>
+</head>
+<body>
+    <header><h1>GERENCIAMENTO DE ESTOQUE</h1></header>
+    <div class="container">
+        <div class="card" style="margin-bottom: 40px;">
+            <form action="/admin/add" method="POST" enctype="multipart/form-data">
+                <input type="text" name="titulo" placeholder="NOME DO PRODUTO" required>
+                <input type="number" name="preco" placeholder="PREÇO" step="0.01" required>
+                <input type="text" name="slug" placeholder="SLUG (ex: camiseta-oversized)" required>
+                <input type="file" name="imagem" required>
+                <button type="submit" class="btn">LANÇAR NOVO DROP</button>
+            </form>
+        </div>
+
+        <div class="grid">
+            <% produtos.forEach(p => { %>
+                <div class="card">
+                    <p><%= p.titulo %> - R$ <%= p.preco %></p>
+                    <button class="btn" style="background: red;" onclick="deletar('<%= p.id %>')">DELETAR</button>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    <script>
+        function deletar(id) {
+            if(confirm('Remover produto?')) {
+                fetch('/admin/delete/'+id, { method: 'POST' }).then(() => location.reload());
+            }
+        }
+    </script>
+</body>
+</html>

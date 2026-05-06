@@ -1,177 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guten | Streetwear Official</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        
-        /* --- ESTILOS DA ANIMAÇÃO DE ENTRADA --- */
-        #guten-intro {
-            position: fixed;
-            inset: 0;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .logo-half {
-            position: absolute;
-            width: 350px; 
-            height: 350px;
-            background-image: url('/guten-logo.png'); 
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            animation-duration: 0.5s;
-            animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
-            animation-fill-mode: forwards;
-            animation-delay: 0.8s;
-        }
-
-        .logo-left {
-            clip-path: polygon(0 0, 50% 0, 65% 100%, 0 100%);
-            animation-name: splitLeft;
-        }
-
-        .logo-right {
-            clip-path: polygon(50% 0, 100% 0, 100% 100%, 65% 100%);
-            animation-name: splitRight;
-        }
-
-        @keyframes splitLeft {
-            0% { transform: translateX(0); opacity: 1; }
-            100% { transform: translateX(-150%) rotate(-15deg); opacity: 0; }
-        }
-
-        @keyframes splitRight {
-            0% { transform: translateX(0); opacity: 1; }
-            100% { transform: translateX(150%) rotate(15deg); opacity: 0; }
-        }
-
-        .intro-fade-out {
-            animation: fadeOut 0.4s forwards;
-            animation-delay: 1.2s;
-        }
-
-        @keyframes fadeOut {
-            to { opacity: 0; visibility: hidden; }
-        }
-
-        /* --- ESTILOS DO SITE --- */
-        .hero-zoom:hover img { transform: scale(1.03); transition: 0.8s; }
-    </style>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>GUTEN STREETWEAR</title>
 </head>
-<body class="bg-white text-black">
-
-    <div id="guten-intro">
-        <div class="logo-half logo-left"></div>
-        <div class="logo-half logo-right"></div>
+<body>
+    <header><h1>GUTEN STREETWEAR</h1></header>
+    <div class="container">
+        <div class="grid">
+            <% produtos.forEach(p => { %>
+                <div class="card">
+                    <img src="<%= p.img %>">
+                    <h2><%= p.titulo %></h2>
+                    <p>R$ <%= p.preco.toFixed(2) %></p>
+                    <button class="btn" onclick="comprar('<%= p.titulo %>', '<%= p.preco %>')">COMPRAR AGORA</button>
+                </div>
+            <% }) %>
+        </div>
     </div>
-
-    <div class="bg-zinc-100 py-2 text-center text-[10px] font-bold tracking-widest uppercase border-b">
-        DROP 01: DISPONÍVEL POR TEMPO LIMITADO
-    </div>
-
-    <nav class="flex items-center justify-between px-8 py-5 sticky top-0 bg-white/90 backdrop-blur-md z-40 border-b border-zinc-100">
-        <div class="flex-1 hidden md:block">
-            <ul class="flex gap-8 font-bold text-xs uppercase tracking-widest">
-                <li class="cursor-pointer hover:text-zinc-500 transition"><a href="/categoria/shop">Shop</a></li>
-                <li class="cursor-pointer hover:text-zinc-500 transition"><a href="/categoria/collections">Collections</a></li>
-                <li class="cursor-pointer hover:text-zinc-500 transition"><a href="/about">About</a></li>
-            </ul>
-        </div>
-        
-        <div class="flex-1 text-center font-black text-4xl tracking-tighter italic">
-            <a href="/">GUTEN</a>
-        </div>
-
-        <div class="flex-1 flex justify-end gap-6 items-center">
-            <svg class="w-5 h-5 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            <div class="relative cursor-pointer">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                <span class="absolute -top-2 -right-2 bg-black text-white text-[8px] rounded-full w-4 h-4 flex items-center justify-center">0</span>
-            </div>
-        </div>
-    </nav>
-
-    <section class="relative h-[90vh] bg-zinc-900 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1550639525-c97d455acf70?auto=format&fit=crop&q=80&w=2000" 
-             class="w-full h-full object-cover opacity-80" alt="Guten Campaign">
-        
-        <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
-            <h1 class="text-7xl md:text-[10rem] font-black italic uppercase leading-none tracking-tighter mb-4 animate-pulse">
-                <%= bannerTitle %>
-            </h1>
-            <p class="text-sm md:text-lg mb-8 tracking-[0.3em] font-light uppercase"><%= subTitle %></p>
-            <a href="/categoria/skull-drop" class="bg-white text-black px-12 py-4 font-black hover:bg-zinc-200 transition-all duration-300 transform hover:scale-105 inline-block">
-                GARANTIR ACESSO
-            </a>
-        </div>
-    </section>
-
-    <section class="px-8 py-20 bg-white">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <% categorias.forEach(cat => { %>
-                <div class="relative group overflow-hidden hero-zoom h-[600px] bg-zinc-100">
-                    <img src="<%= cat.img %>" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-1000">
-                    <div class="absolute inset-0 p-10 flex flex-col justify-end">
-                        <h3 class="text-white text-4xl font-black italic uppercase"><%= cat.titulo %></h3>
-                        <a href="<%= cat.link %>" class="mt-4 bg-white w-fit px-6 py-2 font-bold text-xs uppercase tracking-widest hover:bg-black hover:text-white transition">
-                            Ver Mais
-                        </a>
-                    </div>
-                </div>
-            <% }); %>
-        </div>
-    </section>
-
-    <footer class="bg-black text-white px-8 py-20">
-        <div class="flex flex-col md:flex-row justify-between items-start border-b border-zinc-800 pb-20">
-            <div class="mb-10 md:mb-0">
-                <div class="text-5xl font-black italic tracking-tighter mb-6">GUTEN</div>
-                <p class="text-zinc-500 max-w-xs text-sm">Design brutalista, essência urbana. O novo padrão do streetwear nacional.</p>
-            </div>
-            <div class="grid grid-cols-2 gap-20">
-                <div>
-                    <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Social</h4>
-                    <ul class="text-zinc-400 text-sm space-y-4">
-                        <li class="hover:text-white cursor-pointer"><a href="#">Instagram</a></li>
-                        <li class="hover:text-white cursor-pointer"><a href="#">TikTok</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Ajuda</h4>
-                    <ul class="text-zinc-400 text-sm space-y-4">
-                        <li class="hover:text-white cursor-pointer"><a href="/contact">Contato</a></li>
-                        <li class="hover:text-white cursor-pointer"><a href="#">Envio</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="pt-10 flex justify-between text-[10px] text-zinc-600 uppercase tracking-[0.2em]">
-            <span>© 2026 GUTEN CLOTHING CO.</span>
-            <span>Feito para as ruas</span>
-        </div>
-    </footer>
-
-    <script>
-        // Função para remover a tela de intro após a animação
-        window.addEventListener('load', function() {
-            const intro = document.getElementById('guten-intro');
-            if(intro) {
-                intro.classList.add('intro-fade-out');
-                setTimeout(() => {
-                    intro.remove();
-                    document.body.style.overflowY = 'auto'; 
-                }, 1600);
-            }
-        });
-    </script>
+    <script src="/js/checkout.js"></script>
 </body>
 </html>
