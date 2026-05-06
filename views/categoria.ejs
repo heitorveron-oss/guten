@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Guten | <%= titulo %></title>
+</head>
+<body class="bg-white">
+    <nav class="p-8 border-b">
+        <a href="/" class="font-black italic text-2xl">GUTEN</a>
+    </nav>
+
+    <main class="px-8 py-20">
+        <h1 class="text-6xl font-black italic mb-10 uppercase"><%= titulo %></h1>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="group cursor-pointer">
+                <div class="bg-zinc-100 aspect-[3/4] overflow-hidden mb-4">
+                    <img src="https://images.unsplash.com/photo-1554568212-3c1630c95a49?q=80&w=1000" class="w-full h-full object-cover grayscale hover:grayscale-0 transition">
+                </div>
+                <h3 class="font-bold uppercase text-sm">Peça de Exemplo</h3>
+                <p class="text-zinc-500 text-xs">R$ 199,00</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

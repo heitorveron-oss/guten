@@ -24,7 +24,7 @@
             position: absolute;
             width: 350px; 
             height: 350px;
-            background-image: url('/guten-logo.png'); /* Caminho corrigido para a pasta public */
+            background-image: url('/guten-logo.png'); 
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -81,9 +81,9 @@
     <nav class="flex items-center justify-between px-8 py-5 sticky top-0 bg-white/90 backdrop-blur-md z-40 border-b border-zinc-100">
         <div class="flex-1 hidden md:block">
             <ul class="flex gap-8 font-bold text-xs uppercase tracking-widest">
-                <li class="cursor-pointer hover:text-zinc-500 transition">Shop</li>
-                <li class="cursor-pointer hover:text-zinc-500 transition">Collections</li>
-                <li class="cursor-pointer hover:text-zinc-500 transition">About</li>
+                <li class="cursor-pointer hover:text-zinc-500 transition"><a href="/categoria/shop">Shop</a></li>
+                <li class="cursor-pointer hover:text-zinc-500 transition"><a href="/categoria/collections">Collections</a></li>
+                <li class="cursor-pointer hover:text-zinc-500 transition"><a href="/about">About</a></li>
             </ul>
         </div>
         
@@ -95,7 +95,7 @@
             <svg class="w-5 h-5 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             <div class="relative cursor-pointer">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                <span id="cart-count" class="absolute -top-2 -right-2 bg-black text-white text-[8px] rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                <span class="absolute -top-2 -right-2 bg-black text-white text-[8px] rounded-full w-4 h-4 flex items-center justify-center">0</span>
             </div>
         </div>
     </nav>
@@ -106,11 +106,12 @@
         
         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-center px-4">
             <h1 class="text-7xl md:text-[10rem] font-black italic uppercase leading-none tracking-tighter mb-4 animate-pulse">
-                <%= bannerTitle %> </h1>
+                <%= bannerTitle %>
+            </h1>
             <p class="text-sm md:text-lg mb-8 tracking-[0.3em] font-light uppercase"><%= subTitle %></p>
-            <button class="bg-white text-black px-12 py-4 font-black hover:bg-zinc-200 transition-all duration-300 transform hover:scale-105">
+            <a href="/categoria/skull-drop" class="bg-white text-black px-12 py-4 font-black hover:bg-zinc-200 transition-all duration-300 transform hover:scale-105 inline-block">
                 GARANTIR ACESSO
-            </button>
+            </a>
         </div>
     </section>
 
@@ -118,7 +119,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <% categorias.forEach(cat => { %>
                 <div class="relative group overflow-hidden hero-zoom h-[600px] bg-zinc-100">
-                    <img src="<%= cat.img %>" alt="<%= cat.titulo %>" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-1000">
+                    <img src="<%= cat.img %>" class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-1000">
                     <div class="absolute inset-0 p-10 flex flex-col justify-end">
                         <h3 class="text-white text-4xl font-black italic uppercase"><%= cat.titulo %></h3>
                         <a href="<%= cat.link %>" class="mt-4 bg-white w-fit px-6 py-2 font-bold text-xs uppercase tracking-widest hover:bg-black hover:text-white transition">
@@ -140,15 +141,15 @@
                 <div>
                     <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Social</h4>
                     <ul class="text-zinc-400 text-sm space-y-4">
-                        <li class="hover:text-white cursor-pointer">Instagram</li>
-                        <li class="hover:text-white cursor-pointer">TikTok</li>
+                        <li class="hover:text-white cursor-pointer"><a href="#">Instagram</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="#">TikTok</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold text-xs uppercase tracking-widest mb-6">Ajuda</h4>
                     <ul class="text-zinc-400 text-sm space-y-4">
-                        <li class="hover:text-white cursor-pointer">Contato</li>
-                        <li class="hover:text-white cursor-pointer">Envio</li>
+                        <li class="hover:text-white cursor-pointer"><a href="/contact">Contato</a></li>
+                        <li class="hover:text-white cursor-pointer"><a href="#">Envio</a></li>
                     </ul>
                 </div>
             </div>
@@ -160,10 +161,10 @@
     </footer>
 
     <script>
-        // Lógica da Intro
+        // Função para remover a tela de intro após a animação
         window.addEventListener('load', function() {
             const intro = document.getElementById('guten-intro');
-            if (intro) {
+            if(intro) {
                 intro.classList.add('intro-fade-out');
                 setTimeout(() => {
                     intro.remove();
